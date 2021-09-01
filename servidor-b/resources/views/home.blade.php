@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="d-flex flex-column align-items-center justify-content-center p-md-3 p-2">
-      <div class="d-flex w-md-100 flex-row align-items-center">  
+  <div class="home-container"> 
+    <div class="d-flex flex-column align-items-center w-100 p-md-3 p-2">
         <div class="card card-fixed-w d-flex flex-column justify-content-center my-3 p-3">
           <strong>RU Central</strong>
           <div class="d-flex flex-row justify-content-between mt-1">
@@ -16,9 +16,7 @@
             </span>
           </div>
         </div>
-      </div>
 
-      <div class="d-flex w-md-100 flex-row align-items-center">  
         <div class="card card-fixed-w d-flex flex-column justify-content-center my-3 p-3">
           <strong>RU Setor IV</strong>
           <div class="d-flex flex-row justify-content-between mt-1">
@@ -32,6 +30,6 @@
             </span>
           </div>
         </div>
-      </div>
-    
+    </div>
+  </div>
 @endsection
