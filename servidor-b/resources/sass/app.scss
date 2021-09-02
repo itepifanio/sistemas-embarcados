@@ -13,6 +13,14 @@
 @import "~@fortawesome/fontawesome-free/scss/solid";
 @import "~@fortawesome/fontawesome-free/scss/brands";
 
+.text-lg{
+    font-size: 2rem;
+}
+
+body{
+    height: 100%;
+    background-color: #fff;
+}
 
 .card{
 
@@ -26,19 +34,30 @@
     }
 }
 
-.text-lg{
-    font-size: 2rem;
+@media (max-width: 991.98px){
+    .home-container{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-image: url('/images/queue-concept-illustration/2942529.jpg');
+        background-repeat: no-repeat;
+        background-size: 100% auto;
+        background-position: left bottom;
+    }
 }
 
-.home-container{
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-image: url('/images/queue-concept-illustration/2942529.jpg');
-    background-repeat: no-repeat;
-    background-size: 100% auto;
-    background-position: center top;
-    background-attachment: fixed;
+@media (min-width: 992px){
+    .home-container{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-image: url('/images/queue-concept-illustration/2942529.jpg');
+        background-repeat: no-repeat;
+        background-size: 100% auto;
+        background-position: center top;
+    }
 }

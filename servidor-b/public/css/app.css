@@ -16127,27 +16127,19 @@ readers do not read off random characters that represent icons */
   font-weight: 400;
 }
 
+.text-lg {
+  font-size: 2rem;
+}
+
+body {
+  height: 100%;
+  background-color: #fff;
+}
+
 .card-fixed-w {
   width: 400px;
   max-width: 100%;
 }
 .card-detail {
   background-color: #f2f2f2;
-}
-
-.text-lg {
-  font-size: 2rem;
-}
-
-.home-container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-image: url("/images/queue-concept-illustration/2942529.jpg");
-  background-repeat: no-repeat;
-  background-size: 100% auto;
-  background-position: center top;
-  background-attachment: fixed;
 }
