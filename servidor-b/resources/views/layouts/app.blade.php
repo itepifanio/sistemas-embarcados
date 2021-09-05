@@ -41,7 +41,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/dashboard">Dashboard</a>
                         </li>
-                        
+
                         <!-- @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
@@ -82,5 +82,7 @@
             @yield('content')
         </main>
     </div>
+
+    @stack('javascript')
 </body>
 </html>
