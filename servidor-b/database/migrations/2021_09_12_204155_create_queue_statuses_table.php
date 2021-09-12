@@ -11,6 +11,7 @@ class CreateQueueStatusesTable extends Migration
         Schema::create('queue_statuses', function (Blueprint $table) {
             $table->id();
             $table->string('camera_name');
+            $table->string('queue_name');
             $table->integer('camera_status');
             $table->timestamps();
         });

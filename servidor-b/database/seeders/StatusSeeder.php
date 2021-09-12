@@ -17,6 +17,7 @@ class StatusSeeder extends Seeder
             for ($j = 1; $j <= self::NUM_CAMERAS; $j++) {
                 QueueStatus::factory()->create([
                     'camera_name' => 'Camera' . $j,
+                    'queue_name'  => $i < 6 ? QueueStatus::QUEUE_NAMES[0] : QueueStatus::QUEUE_NAMES[1],
                 ]);
             }
         }
