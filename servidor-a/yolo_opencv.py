@@ -113,7 +113,7 @@ for name, point in rectPoints.items():
     rectPoints[name][0] = rectPoints[name][0] * W
     rectPoints[name][1] = rectPoints[name][1] * H
 
-for f in os.listdir('.'):
+for f in os.listdir('imgs'):
     if not "jpg" in f: continue
     image = cv2.imread(f)
     image = cv2.resize(image, (W, H), interpolation = cv2.INTER_AREA)
