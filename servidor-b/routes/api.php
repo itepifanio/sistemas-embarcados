@@ -2,18 +2,16 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WebhookController;
+use App\Http\Controllers\Api\StatusStatsController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+Route::post('webhook', WebhookController::class)->name('webhook');
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/que', function (Request $request) {
     return $request->user();
 });
+
+Route::name('api.')
+    ->group(function () {
+        Route::get('queue-status', StatusStatsController::class)->name('queue-status');
+    });
