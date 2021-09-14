@@ -16,13 +16,12 @@ class StatusStats
         $this->query = QueueStatus::query();
     }
 
-    public function getStats($id): Collection
+    public function getStats($id): QueueStatus
     {
         return $this->query
             ->where('restaurant_id', $id)
             ->orderByDesc('id')
-            ->take(5)
-            ->get();
+            ->first();
     }
 
     public function getCameraNames(): array
@@ -32,46 +31,5 @@ class StatusStats
             ->distinct('camera_name')
             ->get()
             ->all();
-    }
-
-    public function getQueueUnifiedStatus($id){
-        $cameras = $this->getStats($id);
-        
-        if($cameras->count() != 5){
-            return 1;
-        }
-
-        $restaurant = Restaurant::find($id);
-        
-        switch($restaurant->name){
-            case 'Central':
-                if($cameras[0]->camera_status != 5){
-                    return 1;
-                }else if($cameras[0]->camera_status == 5 && $cameras[1]->camera_status != 5){
-                    return 2;
-                }else if ($cameras[1]->camera_status == 5 && ($cameras[2]->camera_status != 5 || $cameras[3]->camera_status != 5) ){
-                    return 3;
-                }else if (($cameras[2]->camera_status == 5 || $cameras[3]->camera_status == 5) && $cameras[4]->camera_status != 5){
-                    return 4;
-                }else if ($cameras[4]->camera_status == 5){
-                    return 5;
-                }
-            case 'Setor IV':
-                if($cameras[0]->camera_status != 5){
-                    return 1;
-                }else if($cameras[0]->camera_status == 5 && $cameras[1]->camera_status != 5){
-                    return 2;
-                }else if ($cameras[1]->camera_status == 5 && $cameras[2]->camera_status != 5 && $cameras[3]->camera_status != 5 ){
-                    return 3;
-                }else if (($cameras[2]->camera_status == 5 || $cameras[3]->camera_status == 5) && $cameras[4]->camera_status != 5){
-                    return 4;
-                }else if ($cameras[4]->camera_status == 5){
-                    return 5;
-                }
-            default:
-                return 1;
-        }
-
-        
     }
 }

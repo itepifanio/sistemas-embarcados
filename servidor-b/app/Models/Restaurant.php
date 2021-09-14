@@ -12,4 +12,8 @@ class Restaurant extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function queue_statuses() {
+        return $this->hasMany(QueueStatus::class);
+    }
 }

@@ -18,7 +18,6 @@ class StatusSeeder extends Seeder
         for($i = 1; $i <= self::NUM_REQUESTS; $i++) {
             for ($j = 1; $j <= self::NUM_CAMERAS; $j++) {
                 QueueStatus::factory()->create([
-                    'camera_name' => 'Camera' . $j,
                     'restaurant_id'  => $j < 6 ? $restaurants[0] : $restaurants[1],
                 ]);
             }

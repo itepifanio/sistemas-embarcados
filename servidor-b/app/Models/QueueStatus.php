@@ -18,7 +18,10 @@ class QueueStatus extends Model
     ];
 
     protected $fillable = [
-        'camera_name',
-        'camera_status',
+        'queue_status',
     ];
+
+    public function restaurant() {
+        return $this->belongsTo(Restaurants::class);
+    }
 }
