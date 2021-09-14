@@ -1,4 +1,5 @@
 import CircuitManager
+from img_processing.processor import process_images
 
 
 cm = CircuitManager()
@@ -11,7 +12,7 @@ def main():
   for ip in IP_LISTS:
     imgs_from_ips[ip] = cm.get_img(ip) # carregar a imagem usando opencv
 
-  queue_lvls = process_imgs(imgs_from_ips)
+  queue_lvls = process_images(imgs_from_ips)
 
   """
   queue_lvls = {
