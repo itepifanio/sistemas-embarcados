@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Restaurant;
 use App\Models\QueueStatus;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -15,12 +16,12 @@ class StatusStats
         $this->query = QueueStatus::query();
     }
 
-    public function getStats(): Collection
+    public function getStats($id): QueueStatus
     {
         return $this->query
+            ->where('restaurant_id', $id)
             ->orderByDesc('id')
-            ->take(10) // 10 is the number of cameras used in this project how to avoid hard coded here?
-            ->get();
+            ->first();
     }
 
     public function getCameraNames(): array

@@ -7,8 +7,8 @@ use App\Services\StatusStats;
 
 class StatusStatsController extends Controller
 {
-    public function __invoke(StatusStats $service)
+    public function __invoke($id, StatusStats $service)
     {
-        return response()->json($service->getStats());
+        return response()->json($service->getStats($id));
     }
 }

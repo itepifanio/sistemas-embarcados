@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
          ]);
 
          // to test the application before the server A be ready to send the actual information.
+        (new RestaurantsSeeder())->run();
         (new StatusSeeder())->run();
     }
 }

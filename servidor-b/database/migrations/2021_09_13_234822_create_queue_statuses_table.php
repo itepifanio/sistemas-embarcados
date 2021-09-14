@@ -10,9 +10,9 @@ class CreateQueueStatusesTable extends Migration
     {
         Schema::create('queue_statuses', function (Blueprint $table) {
             $table->id();
-            $table->string('camera_name');
-            $table->string('queue_name');
-            $table->integer('camera_status');
+            $table->bigInteger('restaurant_id')->unsigned();
+            $table->integer('queue_status');
+            $table->foreign('restaurant_id')->references('id')->on('restaurants');
             $table->timestamps();
         });
     }

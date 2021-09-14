@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Restaurant;
 use App\Models\QueueStatus;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -11,10 +12,11 @@ class QueueStatusFactory extends Factory
 
     public function definition()
     {
+        $restaurants = Restaurant::all()->pluck('id')->toArray();
+
         return [
-            'camera_name' => 'Camera ' . $this->faker->randomDigit(),
-            'queue_name'  => $this->faker->randomElement(QueueStatus::QUEUE_NAMES),
-            'camera_status' => $this->faker->randomElement(array_keys(QueueStatus::STATUSES)),
+            'restaurant_id'  => $this->faker->randomElement($restaurants),
+            'queue_status' => $this->faker->randomElement(array_keys(QueueStatus::STATUSES)),
         ];
     }
 }

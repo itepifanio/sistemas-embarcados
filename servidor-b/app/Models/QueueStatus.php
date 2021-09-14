@@ -17,14 +17,11 @@ class QueueStatus extends Model
         5 => 'Extremamente Cheia',
     ];
 
-    // this const can be ignored once real data is used
-    public const QUEUE_NAMES = [
-        'Refeitório',
-        'Central',
+    protected $fillable = [
+        'queue_status',
     ];
 
-    protected $fillable = [
-        'camera_name',
-        'camera_status',
-    ];
+    public function restaurant() {
+        return $this->belongsTo(Restaurants::class);
+    }
 }
