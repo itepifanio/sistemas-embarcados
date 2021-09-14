@@ -31,4 +31,12 @@ class StatusStats
             ->get()
             ->all();
     }
+
+    public function getQueueUnifiedStatus(): int{
+        $current = $this->getStats();
+
+        
+
+        return 2;
+    }
 }

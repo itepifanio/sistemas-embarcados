@@ -9,6 +9,6 @@ class StatusStatsController extends Controller
 {
     public function __invoke(StatusStats $service)
     {
-        return response()->json($service->getStats());
+        return response()->json($service->getQueueUnifiedStatus());
     }
 }
