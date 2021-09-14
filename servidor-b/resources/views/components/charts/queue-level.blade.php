@@ -15,7 +15,8 @@
             };
 
             document.addEventListener('DOMContentLoaded', function () {
-                const MONTHS = ['08/10/2021 18:21h'];
+                let months   = [];
+                let datasets = [];
                 const COLORS = [
                     "#a491d3",
                     "#818aa3",
@@ -30,43 +31,39 @@
                     "#69385c",
                 ];
 
-                let datasets = [];
+                window.axios.get('{{ route('api.queue-status') }}').then(res => {
+                    months = [res.data[0].created_at];
 
-                for (let i = 1; i <= 10; i++) {
-                    let data = [];
-
-                    for (let j = 0; j < MONTHS.length; j++) {
-                        data.push(rand(0, 3));
+                    for (let i = 0; i < res.data.length; i++) {
+                        datasets.push({
+                            label: res.data[i].camera_name,
+                            backgroundColor: COLORS[i-1],
+                            data: [res.data[i].camera_status],
+                            borderWidth: 1,
+                        });
                     }
 
-                    datasets.push({
-                        label: 'Sensor ' + i,
-                        backgroundColor: COLORS[i-1],
-                        data: data,
-                        borderWidth: 1,
-                    });
-                }
+                    let barChartData = {
+                        labels: months,
+                        datasets: datasets
+                    };
 
-                let barChartData = {
-                    labels: MONTHS,
-                    datasets: datasets
-                };
+                    const ctx = document.getElementById("queue-level").getContext("2d");
 
-                const ctx = document.getElementById("queue-level").getContext("2d");
-
-                new window.Chart(ctx, {
-                    type: 'bar',
-                    data: barChartData,
-                    options: {
-                        responsive: true,
-                        legend: {
-                            position: 'top',
-                        },
-                        title: {
-                            display: true,
-                            text: 'Chart.js Bar Chart'
+                    new window.Chart(ctx, {
+                        type: 'bar',
+                        data: barChartData,
+                        options: {
+                            responsive: true,
+                            legend: {
+                                position: 'top',
+                            },
+                            title: {
+                                display: true,
+                                text: 'Chart.js Bar Chart'
+                            }
                         }
-                    }
+                    });
                 });
             });
         </script>
