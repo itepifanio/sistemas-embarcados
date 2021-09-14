@@ -13,6 +13,14 @@ def main():
 
   queue_lvls = process_imgs(imgs_from_ips)
 
+  """
+  queue_lvls = {
+    "r1:1": True,
+    "r1:2": False,
+    ...
+  }
+  """
+
   send_lvls(queue_lvls)
 
 
