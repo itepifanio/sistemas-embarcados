@@ -27,11 +27,11 @@ class HomeController extends Controller
     {   
         $restaurants = $this->restaurantsService->getRestaurants();
         
-        $restaurants->map(function ($restaurant, $key) {
+        $restaurants->each(function ($restaurant, $key) {
             $restaurant->status = QueueStatus::STATUSES[$this->statusStatsService->getQueueUnifiedStatus($restaurant->id)];
             return $restaurant;
         });
-
+        
         return view('home', ['restaurants' => $restaurants]);
     }
 }

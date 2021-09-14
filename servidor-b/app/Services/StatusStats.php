@@ -34,8 +34,24 @@ class StatusStats
     }
 
     public function getQueueUnifiedStatus($id){
-        $current = $this->getStats($id);
+        $cameras = $this->getStats($id);
+        
+        if($cameras->count() != 5){
+            return 1;
+        }
 
-        return 2;
+        //ver se tem forma melhor de fazer isso
+        if($cameras[0]->camera_status != 5){
+            return 1;
+        }else if($cameras[0]->camera_status == 5 && $cameras[1]->camera_status != 5){
+            return 2;
+        }else if ($cameras[1]->camera_status == 5 && $cameras[2]->camera_status != 5 && $cameras[3]->camera_status != 5 ){
+            return 3;
+        }else if (($cameras[2]->camera_status == 5 || $cameras[3]->camera_status == 5) && $cameras[4]->camera_status != 5){
+            return 4;
+        }else if ($cameras[4]->camera_status == 5){
+            return 5;
+        }
+
     }
 }
