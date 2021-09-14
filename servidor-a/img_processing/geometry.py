@@ -1,5 +1,5 @@
 import numpy as np
-from const import POINTS
+from .const import POINTS
 
 
 def get_polys(w, h):

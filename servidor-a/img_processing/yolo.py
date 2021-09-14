@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-from const import NMS_THRESHOLD, CONF_THRESHOLD
+from .const import NMS_THRESHOLD, CONF_THRESHOLD
 
 def get_output_layers(net):
     layer_names = net.getLayerNames()

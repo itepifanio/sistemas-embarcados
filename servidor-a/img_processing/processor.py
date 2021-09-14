@@ -1,9 +1,9 @@
 import cv2
 import numpy as np
 import os
-from const import NET, CLASSES, W, H
-from geometry import get_lower_points, get_mid_point, is_point_inside_poly, get_polys
-from yolo import get_persons_rects
+from .const import NET, CLASSES, W, H
+from .geometry import get_lower_points, get_mid_point, is_point_inside_poly, get_polys
+from .yolo import get_persons_rects
 
 
 
