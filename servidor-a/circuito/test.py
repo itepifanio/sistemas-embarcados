@@ -3,7 +3,7 @@ import cv2
 
 IP_LISTS = [f'r{i}:{j}' for i in [1, 2] for j in range(1, 6)]
 
-cds = [Circuito(ip ) for ip in IP_LISTS]
+
 imgs_t1 = { cd.get_ip() : cd.get_image() for cd in cds}
 imgs_t2 = { cd.get_ip() : cd.get_image() for cd in cds}
 imgs_t3 = { cd.get_ip() : cd.get_image() for cd in cds}
