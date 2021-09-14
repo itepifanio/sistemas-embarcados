@@ -6,6 +6,7 @@ CONFIG = "yolov3.cfg"
 WEIGHTS = "yolov3.weights"
 CLASSES = "yolov3.txt"
 
+
 def get_output_layers(net):
     layer_names = net.getLayerNames()
     output_layers = [layer_names[i[0] - 1] for i in net.getUnconnectedOutLayers()]
@@ -15,11 +16,21 @@ def get_output_layers(net):
 def draw_prediction(img, x, y, x_plus_w, y_plus_h):
     cv2.rectangle(img, (x,y), (x_plus_w,y_plus_h), (255, 255, 255), 2)
 
+
 def load_classes():
     classes = None
     with open(CLASSES, 'r') as f:
         classes = [line.strip() for line in f.readlines()]
     return classes
+
+
+def get_mid_point(a, b):
+    return ((a[0]+b[0]) // 2, (a[1]+b[1]) // 2)
+
+
+def get_feet_points(x, y, x_plus_w, y_plus_h):
+    return [(x, y_plus_h), (x_plus_w, y_plus_h)]
+
 
 def get_persons_rects(net, image, classes):
     Width = image.shape[1]
@@ -115,6 +126,7 @@ for name, point in rectPoints.items():
 
 for f in os.listdir('imgs'):
     if not "jpg" in f: continue
+    f = os.path.join('imgs', f)
     image = cv2.imread(f)
     image = cv2.resize(image, (W, H), interpolation = cv2.INTER_AREA)
     classes = load_classes()
@@ -122,6 +134,13 @@ for f in os.listdir('imgs'):
     rects = get_persons_rects(net, image, classes)
     for rect in rects:
         draw_prediction(image, *rect)
+        feet = get_feet_points(*rect)
+        
+        for p in feet:
+            cv2.circle(image, p, 2, (255, 0, 0), 2)
+
+        mid_point = get_mid_point(*feet)
+        cv2.circle(image, mid_point, 2, (0, 255, 0), 2)
 
     draw_poly(image, POLY_A, (255, 0, 0))
     draw_poly(image, POLY_B, (0, 255, 0))
@@ -129,5 +148,7 @@ for f in os.listdir('imgs'):
     cv2.imshow("object detection", image)
     cv2.waitKey()
     
+
+
     
 cv2.destroyAllWindows()
