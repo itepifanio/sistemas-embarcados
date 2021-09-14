@@ -15,11 +15,12 @@ class StatusStats
         $this->query = QueueStatus::query();
     }
 
-    public function getStats(): Collection
+    public function getStats($id): Collection
     {
         return $this->query
+            ->where('restaurant_id', $id)
             ->orderByDesc('id')
-            ->take(10) // 10 is the number of cameras used in this project how to avoid hard coded here?
+            ->take(5)
             ->get();
     }
 
@@ -32,10 +33,8 @@ class StatusStats
             ->all();
     }
 
-    public function getQueueUnifiedStatus(): int{
-        $current = $this->getStats();
-
-        
+    public function getQueueUnifiedStatus($id){
+        $current = $this->getStats($id);
 
         return 2;
     }

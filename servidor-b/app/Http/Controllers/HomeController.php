@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\QueueStatus;
 use Illuminate\Http\Request;
 use App\Services\Restaurants;
+use App\Services\StatusStats;
 
 class HomeController extends Controller
 {   
-    public Restaurants $service;
+    public Restaurants $restaurantsService;
+    public StatusStats $statusStatsService;
 
-    public function __construct(Restaurants $service)
+    public function __construct(Restaurants $restaurantsService, StatusStats $statusStatsService)
     {
-        $this->service = $service;
+        $this->restaurantsService = $restaurantsService;
+        $this->statusStatsService =  $statusStatsService;
     }
 
     /**
@@ -21,6 +25,13 @@ class HomeController extends Controller
      */
     public function index()
     {   
-        return view('home', ['restaurants' => $this->service->getRestaurants()]);
+        $restaurants = $this->restaurantsService->getRestaurants();
+        
+        $restaurants->map(function ($restaurant, $key) {
+            $restaurant->status = QueueStatus::STATUSES[$this->statusStatsService->getQueueUnifiedStatus($restaurant->id)];
+            return $restaurant;
+        });
+
+        return view('home', ['restaurants' => $restaurants]);
     }
 }

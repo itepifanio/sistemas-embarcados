@@ -17,6 +17,6 @@ class Restaurants
 
     public function getRestaurants(): Collection
     {
-        return $this->query->get();
+        return $this->query->get();   
     }
 }
