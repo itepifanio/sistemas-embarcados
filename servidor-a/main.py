@@ -1,28 +1,21 @@
-import CircuitManager
+import time
+from circuito.circuito import CIRCUITS
 from img_processing.processor import process_images
+from server_logic import send_lvls
+from webhook import send_ru_status
 
-
-cm = CircuitManager()
-IP_LISTS = [
-  "r1:1", # camera 1 do r1
-]
 
 def main():
-  imgs_from_ips = dict()
-  for ip in IP_LISTS:
-    imgs_from_ips[ip] = cm.get_img(ip) # carregar a imagem usando opencv
+  while True:
+    imgs_from_ips = dict()
+    for c in CIRCUITS:
+      imgs_from_ips[c.get_ip()] = c.get_image() # carregar a imagem usando opencv
 
-  queue_lvls = process_images(imgs_from_ips)
+    queue_lvls = process_images(imgs_from_ips)
 
-  """
-  queue_lvls = {
-    "r1:1": True,
-    "r1:2": False,
-    ...
-  }
-  """
 
-  send_lvls(queue_lvls)
+    send_ru_status(send_lvls(queue_lvls))
+    time.sleep(1)
 
 
 if __name__ == "__main__":
