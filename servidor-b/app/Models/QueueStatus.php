@@ -10,11 +10,11 @@ class QueueStatus extends Model
     use HasFactory;
 
     public const STATUSES = [
-        1 => 'Vazia',
-        2 => 'Quase Vazia',
-        3 => 'Normal',
-        4 => 'Cheia',
-        5 => 'Extremamente Cheia',
+        0 => 'Vazia',
+        1 => 'Quase Vazia',
+        2 => 'Normal',
+        3 => 'Cheia',
+        4 => 'Extremamente Cheia',
     ];
 
     protected $fillable = [
