@@ -7,7 +7,6 @@ use App\Services\StatusStats;
 use Illuminate\Http\Request;
 use App\Models\Restaurant;
 use App\Models\QueueStatus;
-use Illuminate\Support\Facades\Log;
 
 class StatusStatsController extends Controller
 {
@@ -18,7 +17,6 @@ class StatusStatsController extends Controller
 
     public function store(Request $request)
     {
-        Log::info($request->all());
         foreach($request->all() as $status) {
             $restaurant = Restaurant::find($status['restaurant_id']);
 
