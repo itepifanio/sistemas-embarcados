@@ -3,19 +3,7 @@
 
     @push('javascript')
         <script>
-            const rand = function(min, max) {
-                if (min==null && max==null)
-                    return 0;
-
-                if (max == null) {
-                    max = min;
-                    min = 0;
-                }
-                return min + Math.floor(Math.random() * (max - min + 1));
-            };
-
             document.addEventListener('DOMContentLoaded', function () {
-                let months   = [];
                 let datasets = [];
                 const COLORS = [
                     "#a491d3",
@@ -32,19 +20,21 @@
                 ];
 
                 window.axios.get('{{ route('api.queue-status') }}').then(res => {
-                    months = [res.data[0].created_at];
+                    let keys = Object.keys(res.data);
 
-                    for (let i = 0; i < res.data.length; i++) {
-                        datasets.push({
-                            label: res.data[i].camera_name,
-                            backgroundColor: COLORS[i-1],
-                            data: [res.data[i].camera_status],
-                            borderWidth: 1,
-                        });
+                    for (let i = 0; i < keys.length; i++) {
+                        for(let j = 0; j < res.data[keys[i]].length; j++) {
+                            datasets.push({
+                                label: res.data[keys[i]][j].restaurant.name,
+                                backgroundColor: COLORS[i - 1],
+                                data: [res.data[keys[i]][j].queue_status],
+                                borderWidth: 1,
+                            });
+                        }
                     }
 
                     let barChartData = {
-                        labels: months,
+                        labels: ['Status'],
                         datasets: datasets
                     };
 

@@ -10,9 +10,9 @@ use App\Models\QueueStatus;
 
 class StatusStatsController extends Controller
 {
-    public function __invoke($id, StatusStats $service)
+    public function __invoke(StatusStats $service)
     {
-        return response()->json($service->getStats($id));
+        return response()->json($service->getStats());
     }
 
     public function store(Request $request)

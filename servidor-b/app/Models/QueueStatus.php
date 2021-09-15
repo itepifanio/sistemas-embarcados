@@ -22,6 +22,6 @@ class QueueStatus extends Model
     ];
 
     public function restaurant() {
-        return $this->belongsTo(Restaurants::class);
+        return $this->belongsTo(Restaurant::class);
     }
 }

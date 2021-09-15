@@ -16,12 +16,14 @@ class StatusStats
         $this->query = QueueStatus::query();
     }
 
-    public function getStats($id): QueueStatus
+    public function getStats(): Collection
     {
         return $this->query
-            ->where('restaurant_id', $id)
+            ->with('restaurant:id,name')
             ->orderByDesc('id')
-            ->first();
+            ->take(10)
+            ->get()
+            ->groupBy('restaurant.name');
     }
 
     public function getCameraNames(): array

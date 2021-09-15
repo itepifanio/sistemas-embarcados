@@ -13,6 +13,6 @@ Route::middleware('auth:sanctum')->get('/que', function (Request $request) {
 
 Route::name('api.')
     ->group(function () {
-        Route::get('queue-status/{id}', StatusStatsController::class)->name('queue-status');
+        Route::get('queue-status', StatusStatsController::class)->name('queue-status');
         Route::post('queue-status/', [StatusStatsController::class, 'store'])->name('queue-status-store');
     });
